@@ -1,3 +1,4 @@
+
 const palindromo = (palabra) => {
   // console.log(palabra);
   let wordModified = palabra.split("").reverse().join("").replace(/\s/g, "").toLowerCase();
@@ -6,11 +7,25 @@ const palindromo = (palabra) => {
   console.log(wordOrigin);
   if (wordModified === wordOrigin) {
 
-    console.log(`La palabra ${palabra} es palindromo`);
+    printPalindrome(`La palabra ${palabra} es palindromo`);
+
   }
   else {
-    console.log(`La palabra ${palabra} NO es palindromo`);
+    printPalindrome(`La palabra ${palabra} NO es palindromo`);
   }
+
 };
 
 palindromo("Anita lava la tina");
+
+function printPalindrome(phrase) {
+
+  const container = document.getElementById('palindrome')
+  const paragraph = document.createElement('p')
+  const text = document.createTextNode(phrase)
+
+  paragraph.appendChild(text)
+  container.appendChild(paragraph)
+}
+
+

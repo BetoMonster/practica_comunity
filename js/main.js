@@ -28,4 +28,28 @@ function printPalindrome(phrase) {
   container.appendChild(paragraph)
 }
 
+//https://pokeapi.co/api/v2/pokemon
 
+function getPokemon() {
+
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.onreadystatechange = function() { 
+        if (this.readyState == 4 && this.status == 200) { 
+
+            let pokemonsArr = JSON.parse(this.responseText).results
+
+            pokemonsArr.forEach(pokemon => {
+                 console.log(pokemon.url)
+                
+            });
+
+
+        }   
+    }
+
+    xhttp.open("GET", "https://pokeapi.co/api/v2/pokemon", true);
+
+    xhttp.send();
+}
+
+getPokemon()

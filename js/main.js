@@ -39,7 +39,7 @@ function getPokemon() {
             let pokemonsArr = JSON.parse(this.responseText).results
 
             pokemonsArr.forEach(pokemon => {
-                 console.log(pokemon.url)
+                 getPokemonUrl(pokemon.url)//console.log(pokemon.url)
                 
             });
 
@@ -53,3 +53,33 @@ function getPokemon() {
 }
 
 getPokemon()
+
+function getPokemonUrl (url) {
+  let pokemonInfo ={} 
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       //document.getElementById("demo").innerHTML = xhttp.responseText;
+       let responseData = JSON.parse (this.responseText)
+      
+      for (const key in responseData) {
+        if (key === "id"){
+          pokemonInfo = {...pokemonInfo, id:responseData[key]}
+        }
+        else if (key === "name") {
+          pokemonInfo = {...pokemonInfo, name:responseData[key]}
+        }
+        else if (key === "stats") {
+          pokemonInfo = {...pokemonInfo, stats:responseData[key]}
+        }
+        else if (key === "sprites") {
+          pokemonInfo = {...pokemonInfo, image:responseData[key]["other"]["dream_world"].front_default}
+        }
+      }console.log (pokemonInfo)
+    } 
+}; 
+xhttp.open("GET", url, true);
+xhttp.send();
+ return pokemonInfo
+}
+
